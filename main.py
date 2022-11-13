@@ -3,7 +3,7 @@ import time
 
 from colorama import Fore, Back, init
 from time import sleep
-from cfonts import render
+from pyfiglet import Figlet
 
 init(convert=True)
 
@@ -14,7 +14,7 @@ output_done = False
 output = False
 done = False
 
-greetings = render(' URL to IP', colors=['red', 'yellow'])
+greetings = Figlet(font='univers')
 
 spacer = "          "
 
@@ -140,7 +140,7 @@ def url_to_ip():
 					continue
 
 
-print(greetings)
+print(greetings.renderText('URL to IP'))
 
 while not done:
 	url_to_ip()
