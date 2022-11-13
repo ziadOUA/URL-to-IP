@@ -163,5 +163,5 @@ while not done:
 			valid = True
 	valid = False
 
-print(greetings)
+print(greetings.renderText('URL to IP'))
 time.sleep(2)
