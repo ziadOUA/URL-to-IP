@@ -14,9 +14,7 @@ output_done = False
 output = False
 done = False
 
-greetings = Figlet(font='univers')
-
-spacer = "          "
+start = Figlet(font='univers')
 
 output_file_name = "output"
 output_file_number = 1
@@ -32,11 +30,11 @@ def url_to_ip():
 	global output_done, done
 	global output_file, output_file_name, output_file_number, output
 
-	print(spacer, Fore.BLACK + Back.WHITE + ' By ziadOUA' + Fore.RESET, Back.RESET)
+	print(Fore.BLACK + Back.WHITE + ' By ziadOUA' + Fore.RESET, Back.RESET)
 
 	while not valid:
 		print(' ')
-		conversion_mode = input("Conversion method \n u : by url \n f : by file \n>>> ")
+		conversion_mode = input("Chose your conversion method \n u : by url \n f : by file \n>>> ")
 		if conversion_mode == "u":
 			url_mode = True
 			file_mode = False
@@ -60,12 +58,12 @@ def url_to_ip():
 		while not valid:
 			try:
 				print(' ')
-				file_path = str(input(".txt File path >>> "))
+				file_path = str(input("Enter the path to the .txt file >>> "))
 				open(file_path)
 				valid = True
 			except:
 				print(' ')
-				print(Fore.RED + "The file path isn't valid" + Fore.RESET)
+				print(Fore.RED + "The input file path is not valid" + Fore.RESET)
 		valid = False
 
 		with open(file_path) as url:
@@ -140,7 +138,7 @@ def url_to_ip():
 					continue
 
 
-print(greetings.renderText('URL to IP'))
+print(start.renderText('URL to IP'))
 
 while not done:
 	url_to_ip()
@@ -163,5 +161,5 @@ while not done:
 			valid = True
 	valid = False
 
-print(greetings.renderText('URL to IP'))
-time.sleep(2)
+print(start.renderText('URL to IP'))
+time.sleep(3)
