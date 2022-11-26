@@ -30,7 +30,8 @@ def url_to_ip():
 	global output_done, done
 	global output_file, output_file_name, output_file_number, output
 
-	print(Fore.BLACK + Back.WHITE + ' By ziadOUA' + Fore.RESET, Back.RESET)
+	print(Fore.BLACK + Back.WHITE + ' By ziadOUA')
+	print(Fore.RESET, Back.RESET + ' ')
 
 	while not valid:
 		print(' ')
@@ -70,6 +71,9 @@ def url_to_ip():
 			for hostname in url:
 				hostname = hostname.rstrip()
 				try:
+					hostname = hostname.replace('http://', '')
+					hostname = hostname.replace('https://', '')
+					hostname = hostname.replace('www.', '')
 					ip = socket.gethostbyname(hostname)
 					print(' ')
 					print(hostname)
@@ -118,6 +122,9 @@ def url_to_ip():
 		while not done:
 			print(' ')
 			hostname = input("Enter the URL, or \n q : to quit \n>>> ")
+			hostname = hostname.replace('http://', '')
+			hostname = hostname.replace('https://', '')
+			hostname = hostname.replace('www.', '')
 			if hostname == "q":
 				done = True
 			if hostname == "Q":
