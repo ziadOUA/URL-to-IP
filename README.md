@@ -1,5 +1,5 @@
 # URL to IP
-![Image](https://i.imgur.com/4VJYGLY.png)
+<img src="Images/banner.png"/>
 
 🌐 URL to IP converts any URL into an IP, whether through a URL or a .txt file.
 
