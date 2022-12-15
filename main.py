@@ -22,6 +22,8 @@ output_file = output_file_name + str(output_file_number) + ".txt"
 
 ip_list = []
 
+slash = "/"
+
 
 def url_to_ip():
 
@@ -68,15 +70,26 @@ def url_to_ip():
 		valid = False
 
 		with open(file_path) as url:
-			for hostname in url:
-				hostname = hostname.rstrip()
+			for old_hostname in url:
+				old_hostname = old_hostname.rstrip()
+				hostname = old_hostname
 				try:
 					hostname = hostname.replace('http://', '')
 					hostname = hostname.replace('https://', '')
 					hostname = hostname.replace('www.', '')
+					if hostname.find("/") != -1:
+						print(' ')
+						print(Fore.BLACK, Back.YELLOW + ' The URL provided still contains a slash character' + Fore.RESET, Back.RESET, end='')
+						print(' ')
+						hostname = hostname.split(slash, 1)[0]
+					else:
+						pass
 					ip = socket.gethostbyname(hostname)
 					print(' ')
-					print(hostname)
+					if old_hostname == hostname:
+						print(hostname)
+					else:
+						print(old_hostname, " -> ", hostname)
 					print('>', end=' ')
 					print(Fore.BLACK, Back.GREEN + ip + Fore.RESET, Back.RESET, end='')
 					print(' ')
@@ -121,10 +134,18 @@ def url_to_ip():
 	elif url_mode:
 		while not done:
 			print(' ')
-			hostname = input("Enter the URL, or \n q : to quit \n>>> ")
+			old_hostname = input("Enter the URL, or \n q : to quit the mode \n>>> ")
+			hostname = old_hostname
 			hostname = hostname.replace('http://', '')
 			hostname = hostname.replace('https://', '')
 			hostname = hostname.replace('www.', '')
+			if hostname.find("/") != -1:
+				print(' ')
+				print(Fore.BLACK, Back.YELLOW + ' The URL provided still contains a slash character' + Fore.RESET, Back.RESET, end = '')
+				print(' ')
+				hostname = hostname.split(slash, 1)[0]
+			else:
+				pass
 			if hostname == "q":
 				done = True
 			if hostname == "Q":
@@ -133,7 +154,10 @@ def url_to_ip():
 				try:
 					ip = socket.gethostbyname(hostname)
 					print(' ')
-					print(hostname)
+					if old_hostname == hostname:
+						print(hostname)
+					else:
+						print(old_hostname, " -> ", hostname)
 					print('>', end=' ')
 					print(Fore.BLACK, Back.GREEN + ip + Fore.RESET, Back.RESET)
 				except:
