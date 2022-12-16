@@ -4,9 +4,9 @@
 <img align="left" height="75px" src="https://pictshare.net/satju6.png">
 🌐 URL to IP converts any URL into an IP, whether through a URL or a .txt file.
 <br>
-✨ Can treat up to 1500 lines per minute
+✨ Can treat up to 1500 lines per minute.
 <br>
-🪶 Lightweight
+🪶 Lightweight.
 <br clear="left"/>
 
 <br>
