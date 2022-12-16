@@ -74,14 +74,11 @@ def url_to_ip():
 				old_hostname = old_hostname.rstrip()
 				hostname = old_hostname
 				try:
-					hostname = hostname.replace('http://', '')
-					hostname = hostname.replace('https://', '')
-					hostname = hostname.replace('www.', '')
 					if hostname.find("/") != -1:
 						print(' ')
-						print(Fore.BLACK, Back.YELLOW + ' The URL provided still contains a slash character' + Fore.RESET, Back.RESET, end='')
+						print(Fore.BLACK, Back.BLUE + " The URL provided isn't only a domain name" + Fore.RESET, Back.RESET, end='')
 						print(' ')
-						hostname = hostname.split(slash, 1)[0]
+						hostname = hostname.split(slash)[2]
 					else:
 						pass
 					ip = socket.gethostbyname(hostname)
@@ -136,14 +133,11 @@ def url_to_ip():
 			print(' ')
 			old_hostname = input("Enter the URL, or \n q : to quit the mode \n>>> ")
 			hostname = old_hostname
-			hostname = hostname.replace('http://', '')
-			hostname = hostname.replace('https://', '')
-			hostname = hostname.replace('www.', '')
 			if hostname.find("/") != -1:
 				print(' ')
-				print(Fore.BLACK, Back.YELLOW + ' The URL provided still contains a slash character' + Fore.RESET, Back.RESET, end = '')
+				print(Fore.BLACK, Back.BLUE + " The URL provided isn't only a domain name" + Fore.RESET, Back.RESET, end='')
 				print(' ')
-				hostname = hostname.split(slash, 1)[0]
+				hostname = hostname.split(slash)[2]
 			else:
 				pass
 			if hostname == "q":
