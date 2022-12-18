@@ -100,7 +100,6 @@ def url_to_ip():
 			end_time = time.perf_counter()
 			elapsed_time = end_time - start_time
 			elapsed_time = elapsed_time.__round__(0)
-			# elapsed_time = int(elapsed_time)
 			print('')
 			elapsed_time = str(datetime.timedelta(seconds=elapsed_time))
 			print(f'The execution took {elapsed_time}s')
