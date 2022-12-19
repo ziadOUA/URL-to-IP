@@ -28,6 +28,7 @@ ip_list = []
 
 slash = '/'
 arrow = u'→'
+dot = '.'
 
 
 def url_to_ip():
@@ -37,7 +38,7 @@ def url_to_ip():
 	global output_done, done
 	global output_file, output_file_name, output_file_number, output
 
-	print(Fore.BLACK + Back.WHITE + ' By ziadOUA ' + Fore.RESET + Back.RESET)
+	print(f'{Fore.BLACK + Back.WHITE} By ziadOUA {Fore.RESET + Back.RESET}')
 
 	while not valid:
 		print('')
@@ -62,7 +63,7 @@ def url_to_ip():
 				valid = True
 			except FileNotFoundError:
 				print(' ')
-				print(Fore.RED + "The file path isn't valid" + Fore.RESET)
+				print(f"{Fore.RED}The file path isn't valid{Fore.RESET}")
 		valid = False
 
 		start_time = time.perf_counter()
@@ -74,9 +75,22 @@ def url_to_ip():
 				try:
 					if hostname.find("/") != -1:
 						print(' ')
-						print(Fore.CYAN + "The URL provided isn't only a domain name" + Fore.RESET, end='')
+						print(f"{Fore.CYAN}The URL provided isn't only a domain name{Fore.RESET}", end='')
 						print(' ')
-						hostname = hostname.split(slash)[2]
+						if hostname.count(slash) >= 3:
+							finder = hostname.split(slash)[0]
+							if finder.count(dot) >= 1:
+								hostname = finder
+							else:
+								hostname = hostname.split(slash)[2]
+						elif hostname.count(slash) == 2:
+							finder = hostname.split(slash)[2]
+							if finder.count(dot) >= 1:
+								hostname = finder
+							else:
+								hostname = hostname.split(slash)[0]
+						else:
+							hostname = hostname.split(slash)[0]
 					else:
 						pass
 					ip = socket.gethostbyname(hostname)
@@ -85,15 +99,13 @@ def url_to_ip():
 						print(hostname)
 					else:
 						print(old_hostname, arrow, hostname)
-					print(arrow, end=' ')
-					print(Fore.BLACK, Back.GREEN + ip + Fore.RESET, Back.RESET, end='')
+					print(f'{arrow} {Fore.BLACK + Back.GREEN} {ip} {Fore.RESET + Back.RESET}', end='')
 					print(' ')
 					ip_list.append(ip)
 				except OSError:
 					print(' ')
 					print(hostname)
-					print(arrow, end=' ')
-					print(Fore.BLACK, Back.RED + ' Not Valid' + Fore.RESET, Back.RESET, end='')
+					print(f'{arrow} {Fore.BLACK + Back.RED} Not Valid {Fore.RESET + Back.RESET}', end='')
 					print(' ')
 					continue
 
@@ -134,9 +146,22 @@ def url_to_ip():
 			hostname = old_hostname
 			if hostname.find("/") != -1:
 				print(' ')
-				print(Fore.CYAN + "The URL provided isn't only a domain name" + Fore.RESET, end='')
+				print(f"{Fore.CYAN}The URL provided isn't only a domain name{Fore.RESET}", end='')
 				print(' ')
-				hostname = hostname.split(slash)[2]
+				if hostname.count(slash) >= 3:
+					finder = hostname.split(slash)[0]
+					if finder.count(dot) >= 1:
+						hostname = finder
+					else:
+						hostname = hostname.split(slash)[2]
+				elif hostname.count(slash) == 2:
+					finder = hostname.split(slash)[2]
+					if finder.count(dot) >= 1:
+						hostname = finder
+					else:
+						hostname = hostname.split(slash)[0]
+				else:
+					hostname = hostname.split(slash)[0]
 			else:
 				pass
 			if hostname in ['q', 'Q']:
@@ -149,13 +174,12 @@ def url_to_ip():
 						print(hostname)
 					else:
 						print(old_hostname, arrow, hostname)
-					print(arrow, end='')
-					print(Fore.BLACK, Back.GREEN + ' ' + ip + Fore.RESET, Back.RESET)
+					print(f'{arrow} {Fore.BLACK + Back.GREEN} {ip} {Fore.RESET + Back.RESET}', end='')
+					print(' ')
 				except OSError:
 					print(' ')
 					print(hostname)
-					print(arrow, end='')
-					print(Fore.BLACK, Back.RED + ' Not Valid' + Fore.RESET, Back.RESET, end='')
+					print(f'{arrow} {Fore.BLACK + Back.RED} Not Valid {Fore.RESET + Back.RESET}', end='')
 					print(' ')
 					continue
 
