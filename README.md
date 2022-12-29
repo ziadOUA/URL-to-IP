@@ -1,6 +1,15 @@
 # URL to IP
 <img src="https://pictshare.net/j4qqjc.png" margin-bottom="20px"/>
 
+<p align="center">
+  <img height="30px" src="https://ziadoua.github.io/m3-Markdown-Badges/badges/Python/python2.svg">
+  <img height="30px" src="https://ziadoua.github.io/m3-Markdown-Badges/badges/PyCharm/pycharm2.svg">
+</p>
+
+<p align="center">
+  <img src="https://ziadoua.github.io/m3-Markdown-Badges/badges/LicenceMIT/licencemit2.svg">
+</p>
+
 <img align="left" height="75px" src="https://pictshare.net/satju6.png">
 🌐 URL to IP converts any URL into an IP, whether through a URL or a .txt file.
 <br>
