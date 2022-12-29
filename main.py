@@ -32,7 +32,7 @@ ip_list = []
 slash = '/'
 arrow = u'→'
 dot = '.'
-space = ' '
+separator = '|'
 
 
 def url_to_ip():
@@ -41,7 +41,7 @@ def url_to_ip():
     global output_done, done
     global output_file, output_file_name, output_file_number, output
 
-    print(f'{Fore.BLACK + Back.WHITE} By ziadOUA {Fore.RESET + Back.RESET}')
+    print(f'{Fore.BLACK + Back.WHITE} By ziadOUA {Fore.RESET + Back.RESET} {separator}')
 
     while not valid:
         new_line()
@@ -94,11 +94,11 @@ def file_mode():
                     print(hostname)
                 else:
                     print(old_hostname, arrow, hostname)
-                print(f'{arrow} {Fore.BLACK + Back.GREEN} {ip} {Fore.RESET + Back.RESET}')
+                print(f'{arrow} {Fore.BLACK + Back.GREEN} {ip} {Fore.RESET + Back.RESET} {separator}')
             except OSError:
                 new_line()
                 print(hostname)
-                print(f'{arrow} {Fore.BLACK + Back.RED} Not Valid {Fore.RESET + Back.RESET}')
+                print(f'{arrow} {Fore.BLACK + Back.RED} Not Valid {Fore.RESET + Back.RESET} {separator}')
                 continue
 
         end_time = time.perf_counter()
@@ -154,11 +154,11 @@ def url_mode():
                     print(hostname)
                 else:
                     print(old_hostname, arrow, hostname)
-                print(f'{arrow} {Fore.BLACK + Back.GREEN} {ip} {Fore.RESET + Back.RESET}{space}')
+                print(f'{arrow} {Fore.BLACK + Back.GREEN} {ip} {Fore.RESET + Back.RESET} {separator}')
             except OSError:
                 new_line()
                 print(hostname)
-                print(f'{arrow} {Fore.BLACK + Back.RED} Not Valid {Fore.RESET + Back.RESET}{space}')
+                print(f'{arrow} {Fore.BLACK + Back.RED} Not Valid {Fore.RESET + Back.RESET} {separator}')
                 continue
 
 
