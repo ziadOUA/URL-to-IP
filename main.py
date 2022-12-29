@@ -95,6 +95,7 @@ def file_mode():
                 else:
                     print(old_hostname, arrow, hostname)
                 print(f'{arrow} {Fore.BLACK + Back.GREEN} {ip} {Fore.RESET + Back.RESET} {separator}')
+                ip_list.append(ip)
             except OSError:
                 new_line()
                 print(hostname)
