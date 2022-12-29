@@ -6,7 +6,6 @@ import os
 import datetime
 
 from colorama import Fore, Back, init
-from time import sleep, perf_counter
 from pyfiglet import Figlet
 
 init(convert=True)
@@ -24,11 +23,16 @@ output_file_name = "output"
 output_file_number = 1
 output_file = output_file_name + str(output_file_number) + ".txt"
 
+hostname = None
+
+file_path = None
+
 ip_list = []
 
 slash = '/'
 arrow = u'→'
 dot = '.'
+space = ' '
 
 
 def url_to_ip():
@@ -40,7 +44,7 @@ def url_to_ip():
     print(f'{Fore.BLACK + Back.WHITE} By ziadOUA {Fore.RESET + Back.RESET}')
 
     while not valid:
-        print('')
+        new_line()
         conversion_mode = input("Chose your conversion method \n u : by url \n f : by file \n>>> ")
         if conversion_mode in ['u', 'U']:
             url_conversion_mode = True
@@ -60,18 +64,19 @@ def url_to_ip():
 
 def file_mode():
     global valid
+    global hostname
     global file_conversion_mode, url_conversion_mode
     global output_done, done
-    global output_file, output_file_name, output_file_number, output
+    global output_file, output_file_name, output_file_number, output, file_path
 
     while not valid:
         try:
-            print('')
+            new_line()
             file_path = str(input("Enter the path to the .txt file >>> "))
             open(file_path)
             valid = True
         except FileNotFoundError:
-            print(' ')
+            new_line()
             print(f"{Fore.RED}The file path isn't valid{Fore.RESET}")
     valid = False
 
@@ -81,52 +86,30 @@ def file_mode():
         for old_hostname in url:
             old_hostname = old_hostname.rstrip()
             hostname = old_hostname
+            hostname_finder()
             try:
-                if hostname.find("/") != -1:
-                    print(' ')
-                    print(f"{Fore.CYAN}The URL provided isn't only a domain name{Fore.RESET}", end='')
-                    print(' ')
-                    if hostname.count(slash) >= 3:
-                        finder = hostname.split(slash)[0]
-                        if finder.count(dot) >= 1:
-                            hostname = finder
-                        else:
-                            hostname = hostname.split(slash)[2]
-                    elif hostname.count(slash) == 2:
-                        finder = hostname.split(slash)[2]
-                        if finder.count(dot) >= 1:
-                            hostname = finder
-                        else:
-                            hostname = hostname.split(slash)[0]
-                    else:
-                        hostname = hostname.split(slash)[0]
-                else:
-                    pass
                 ip = socket.gethostbyname(hostname)
-                print(' ')
+                new_line()
                 if old_hostname == hostname:
                     print(hostname)
                 else:
                     print(old_hostname, arrow, hostname)
-                print(f'{arrow} {Fore.BLACK + Back.GREEN} {ip} {Fore.RESET + Back.RESET}', end='')
-                print(' ')
-                ip_list.append(ip)
+                print(f'{arrow} {Fore.BLACK + Back.GREEN} {ip} {Fore.RESET + Back.RESET}')
             except OSError:
-                print(' ')
+                new_line()
                 print(hostname)
-                print(f'{arrow} {Fore.BLACK + Back.RED} Not Valid {Fore.RESET + Back.RESET}', end='')
-                print(' ')
+                print(f'{arrow} {Fore.BLACK + Back.RED} Not Valid {Fore.RESET + Back.RESET}')
                 continue
 
         end_time = time.perf_counter()
         elapsed_time = end_time - start_time
         elapsed_time = elapsed_time.__round__(0)
-        print('')
+        new_line()
         elapsed_time = str(datetime.timedelta(seconds=elapsed_time))
         print(f'The execution took {elapsed_time}s')
 
         while not valid:
-            print(' ')
+            new_line()
             is_output = input("Create an output file ? \n y : yes \n n : no \n>>> ")
             if is_output in ['y', 'Y']:
                 output = True
@@ -151,52 +134,59 @@ def file_mode():
 
 def url_mode():
     global valid
+    global hostname
     global file_conversion_mode, url_conversion_mode
     global output_done, done
     global output_file, output_file_name, output_file_number, output
 
     while not done:
-        print(' ')
+        new_line()
         old_hostname = input("Enter the URL, or \n q : to quit the mode \n>>> ")
         hostname = old_hostname
-        if hostname.find("/") != -1:
-            print(' ')
-            print(f"{Fore.CYAN}The URL provided isn't only a domain name{Fore.RESET}", end='')
-            print(' ')
-            if hostname.count(slash) >= 3:
-                finder = hostname.split(slash)[0]
-                if finder.count(dot) >= 1:
-                    hostname = finder
-                else:
-                    hostname = hostname.split(slash)[2]
-            elif hostname.count(slash) == 2:
-                finder = hostname.split(slash)[2]
-                if finder.count(dot) >= 1:
-                    hostname = finder
-                else:
-                    hostname = hostname.split(slash)[0]
-            else:
-                hostname = hostname.split(slash)[0]
-        else:
-            pass
+        hostname_finder()
         if hostname in ['q', 'Q']:
             done = True
         if hostname != "q":
             try:
                 ip = socket.gethostbyname(hostname)
-                print(' ')
+                new_line()
                 if old_hostname == hostname:
                     print(hostname)
                 else:
                     print(old_hostname, arrow, hostname)
-                print(f'{arrow} {Fore.BLACK + Back.GREEN} {ip} {Fore.RESET + Back.RESET}', end='')
-                print(' ')
+                print(f'{arrow} {Fore.BLACK + Back.GREEN} {ip} {Fore.RESET + Back.RESET}{space}')
             except OSError:
-                print(' ')
+                new_line()
                 print(hostname)
-                print(f'{arrow} {Fore.BLACK + Back.RED} Not Valid {Fore.RESET + Back.RESET}', end='')
-                print(' ')
+                print(f'{arrow} {Fore.BLACK + Back.RED} Not Valid {Fore.RESET + Back.RESET}{space}')
                 continue
+
+
+def hostname_finder():
+    global hostname
+    if hostname.find("/") != -1:
+        new_line()
+        print(f"{Fore.CYAN}The URL provided isn't only a domain name{Fore.RESET}")
+        if hostname.count(slash) >= 3:
+            finder = hostname.split(slash)[0]
+            if finder.count(dot) >= 1:
+                hostname = finder
+            else:
+                hostname = hostname.split(slash)[2]
+        elif hostname.count(slash) == 2:
+            finder = hostname.split(slash)[2]
+            if finder.count(dot) >= 1:
+                hostname = finder
+            else:
+                hostname = hostname.split(slash)[0]
+        else:
+            hostname = hostname.split(slash)[0]
+    else:
+        pass
+
+
+def new_line():
+    print('')
 
 
 if __name__ == '__main__':
@@ -206,9 +196,9 @@ if __name__ == '__main__':
         url_to_ip()
 
         while not valid:
-            print(' ')
+            new_line()
             is_user_done = input("Leave ? \n y : yes \n n : no \n>>> ")
-            print(' ')
+            new_line()
             if is_user_done in ['y', 'Y']:
                 done = True
                 valid = True
