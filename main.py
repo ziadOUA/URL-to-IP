@@ -23,9 +23,10 @@ output_file_name = "output"
 output_file_number = 1
 output_file = output_file_name + str(output_file_number) + ".txt"
 
-hostname = None
+hostname = ''
+old_hostname = ''
 
-file_path = None
+file_path = ''
 
 ip_list = []
 
@@ -64,20 +65,13 @@ def url_to_ip():
 
 def file_mode():
     global valid
-    global hostname
+    global hostname, old_hostname
     global file_conversion_mode, url_conversion_mode
     global output_done, done
     global output_file, output_file_name, output_file_number, output, file_path
 
     while not valid:
-        try:
-            new_line()
-            file_path = str(input("Enter the path to the .txt file >>> "))
-            open(file_path)
-            valid = True
-        except FileNotFoundError:
-            new_line()
-            print(f"{Fore.RED}The file path isn't valid{Fore.RESET}")
+        file_path_input()
     valid = False
 
     start_time = time.perf_counter()
@@ -87,20 +81,7 @@ def file_mode():
             old_hostname = old_hostname.rstrip()
             hostname = old_hostname
             hostname_finder()
-            try:
-                ip = socket.gethostbyname(hostname)
-                new_line()
-                if old_hostname == hostname:
-                    print(hostname)
-                else:
-                    print(old_hostname, arrow, hostname)
-                print(f'{arrow} {Fore.BLACK + Back.GREEN} {ip} {Fore.RESET + Back.RESET} {separator}')
-                ip_list.append(ip)
-            except OSError:
-                new_line()
-                print(hostname)
-                print(f'{arrow} {Fore.BLACK + Back.RED} Not Valid {Fore.RESET + Back.RESET} {separator}')
-                continue
+            hostname_conversion()
 
         end_time = time.perf_counter()
         elapsed_time = end_time - start_time
@@ -133,9 +114,21 @@ def file_mode():
                 output_done = True
 
 
+def file_path_input():
+    global file_path, valid
+    try:
+        new_line()
+        file_path = str(input("Enter the path to the .txt file >>> "))
+        open(file_path)
+        valid = True
+    except FileNotFoundError:
+        new_line()
+        print(f"{Fore.RED}The file path isn't valid{Fore.RESET}")
+
+
 def url_mode():
     global valid
-    global hostname
+    global hostname, old_hostname
     global file_conversion_mode, url_conversion_mode
     global output_done, done
     global output_file, output_file_name, output_file_number, output
@@ -148,19 +141,7 @@ def url_mode():
         if hostname in ['q', 'Q']:
             done = True
         if hostname != "q":
-            try:
-                ip = socket.gethostbyname(hostname)
-                new_line()
-                if old_hostname == hostname:
-                    print(hostname)
-                else:
-                    print(old_hostname, arrow, hostname)
-                print(f'{arrow} {Fore.BLACK + Back.GREEN} {ip} {Fore.RESET + Back.RESET} {separator}')
-            except OSError:
-                new_line()
-                print(hostname)
-                print(f'{arrow} {Fore.BLACK + Back.RED} Not Valid {Fore.RESET + Back.RESET} {separator}')
-                continue
+            hostname_conversion()
 
 
 def hostname_finder():
@@ -184,6 +165,23 @@ def hostname_finder():
             hostname = hostname.split(slash)[0]
     else:
         pass
+
+
+def hostname_conversion():
+    global hostname, old_hostname
+    try:
+        ip = socket.gethostbyname(hostname)
+        new_line()
+        if old_hostname == hostname:
+            print(hostname)
+        else:
+            print(old_hostname, arrow, hostname)
+        print(f'{arrow} {Fore.BLACK + Back.GREEN} {ip} {Fore.RESET + Back.RESET} {separator}')
+        ip_list.append(ip)
+    except OSError:
+        new_line()
+        print(hostname)
+        print(f'{arrow} {Fore.BLACK + Back.RED} Not Valid {Fore.RESET + Back.RESET} {separator}')
 
 
 def new_line():
