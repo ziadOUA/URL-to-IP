@@ -39,11 +39,8 @@ separator = '|'
 def url_to_ip():
     global valid
     global file_conversion_mode, url_conversion_mode
-
     print(f'{Fore.BLACK + Back.WHITE} By ziadOUA {Fore.RESET + Back.RESET} {separator}')
-
     conversion_mode_prompt()
-
     if file_conversion_mode:
         file_mode()
     elif url_conversion_mode:
@@ -53,7 +50,6 @@ def url_to_ip():
 def conversion_mode_prompt():
     global valid
     global url_conversion_mode, file_conversion_mode
-
     while not valid:
         new_line()
         conversion_mode = input("Chose your conversion method \n u : by url \n f : by file \n>>> ")
@@ -71,20 +67,16 @@ def conversion_mode_prompt():
 def file_mode():
     global valid
     global hostname, old_hostname
-
     while not valid:
         file_path_input()
     valid = False
-
     start_time = time.perf_counter()
-
     with open(file_path) as url:
         for old_hostname in url:
             old_hostname = old_hostname.rstrip()
             hostname = old_hostname
             hostname_finder()
             hostname_conversion()
-
         end_time = time.perf_counter()
         elapsed_time = end_time - start_time
         elapsed_time = elapsed_time.__round__(0)
@@ -98,9 +90,7 @@ def file_output():
     global valid
     global output_done
     global output_file, output_file_name, output_file_number, output, file_path
-
     output_prompt()
-
     while not output_done:
         if output:
             try:
@@ -129,7 +119,7 @@ def output_prompt():
 
 
 def file_path_input():
-    global file_path, valid
+    global valid, file_path
     try:
         new_line()
         file_path = str(input("Enter the path to the .txt file >>> "))
@@ -144,7 +134,6 @@ def url_mode():
     global valid
     global hostname, old_hostname
     global done
-
     while not done:
         new_line()
         old_hostname = input("Enter the URL, or \n q : to quit the mode \n>>> ")
