@@ -42,6 +42,18 @@ def url_to_ip():
 
     print(f'{Fore.BLACK + Back.WHITE} By ziadOUA {Fore.RESET + Back.RESET} {separator}')
 
+    conversion_mode_prompt()
+
+    if file_conversion_mode:
+        file_mode()
+    elif url_conversion_mode:
+        url_mode()
+
+
+def conversion_mode_prompt():
+    global valid
+    global url_conversion_mode, file_conversion_mode
+
     while not valid:
         new_line()
         conversion_mode = input("Chose your conversion method \n u : by url \n f : by file \n>>> ")
@@ -54,11 +66,6 @@ def url_to_ip():
             file_conversion_mode = True
             valid = True
     valid = False
-
-    if file_conversion_mode:
-        file_mode()
-    elif url_conversion_mode:
-        url_mode()
 
 
 def file_mode():
