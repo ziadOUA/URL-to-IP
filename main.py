@@ -39,8 +39,6 @@ separator = '|'
 def url_to_ip():
     global valid
     global file_conversion_mode, url_conversion_mode
-    global output_done, done
-    global output_file, output_file_name, output_file_number, output
 
     print(f'{Fore.BLACK + Back.WHITE} By ziadOUA {Fore.RESET + Back.RESET} {separator}')
 
@@ -66,9 +64,6 @@ def url_to_ip():
 def file_mode():
     global valid
     global hostname, old_hostname
-    global file_conversion_mode, url_conversion_mode
-    global output_done, done
-    global output_file, output_file_name, output_file_number, output, file_path
 
     while not valid:
         file_path_input()
@@ -89,29 +84,36 @@ def file_mode():
         new_line()
         elapsed_time = str(datetime.timedelta(seconds=elapsed_time))
         print(f'The execution took {elapsed_time}s')
+        file_output()
 
-        while not valid:
-            new_line()
-            is_output = input("Create an output file ? \n y : yes \n n : no \n>>> ")
-            if is_output in ['y', 'Y']:
-                output = True
-                valid = True
-            elif is_output in ['n', 'N']:
-                output = False
-                valid = True
-        valid = False
 
-        while not output_done:
-            if output:
-                try:
-                    with open(output_file, 'x') as file:
-                        file.write('\n'.join(ip_list))
-                        output_done = True
-                except FileExistsError:
-                    output_file_number = int(output_file_number) + 1
-                    output_file = output_file_name + str(output_file_number) + ".txt"
-            elif not output:
-                output_done = True
+def file_output():
+    global valid
+    global output_done
+    global output_file, output_file_name, output_file_number, output, file_path
+
+    while not valid:
+        new_line()
+        is_output = input("Create an output file ? \n y : yes \n n : no \n>>> ")
+        if is_output in ['y', 'Y']:
+            output = True
+            valid = True
+        elif is_output in ['n', 'N']:
+            output = False
+            valid = True
+    valid = False
+
+    while not output_done:
+        if output:
+            try:
+                with open(output_file, 'x') as file:
+                    file.write('\n'.join(ip_list))
+                    output_done = True
+            except FileExistsError:
+                output_file_number = int(output_file_number) + 1
+                output_file = output_file_name + str(output_file_number) + '.txt'
+        else:
+            output_done = True
 
 
 def file_path_input():
@@ -129,9 +131,7 @@ def file_path_input():
 def url_mode():
     global valid
     global hostname, old_hostname
-    global file_conversion_mode, url_conversion_mode
-    global output_done, done
-    global output_file, output_file_name, output_file_number, output
+    global done
 
     while not done:
         new_line()
