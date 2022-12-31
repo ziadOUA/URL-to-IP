@@ -92,16 +92,7 @@ def file_output():
     global output_done
     global output_file, output_file_name, output_file_number, output, file_path
 
-    while not valid:
-        new_line()
-        is_output = input("Create an output file ? \n y : yes \n n : no \n>>> ")
-        if is_output in ['y', 'Y']:
-            output = True
-            valid = True
-        elif is_output in ['n', 'N']:
-            output = False
-            valid = True
-    valid = False
+    output_prompt()
 
     while not output_done:
         if output:
@@ -114,6 +105,20 @@ def file_output():
                 output_file = output_file_name + str(output_file_number) + '.txt'
         else:
             output_done = True
+
+
+def output_prompt():
+    global valid, output
+    while not valid:
+        new_line()
+        is_output = input("Create an output file ? \n y : yes \n n : no \n>>> ")
+        if is_output in ['y', 'Y']:
+            output = True
+            valid = True
+        elif is_output in ['n', 'N']:
+            output = False
+            valid = True
+    valid = False
 
 
 def file_path_input():
