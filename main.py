@@ -150,20 +150,14 @@ def hostname_finder():
     if hostname.find("/") != -1:
         new_line()
         print(f"{Fore.CYAN}The URL provided isn't only a domain name{Fore.RESET}")
-        if hostname.count(slash) >= 3:
-            finder = hostname.split(slash)[0]
-            if finder.count(dot) >= 1:
-                hostname = finder
-            else:
-                hostname = hostname.split(slash)[2]
-        elif hostname.count(slash) == 2:
-            finder = hostname.split(slash)[2]
-            if finder.count(dot) >= 1:
-                hostname = finder
-            else:
-                hostname = hostname.split(slash)[0]
-        else:
-            hostname = hostname.split(slash)[0]
+
+        cut_hostname = hostname.split(slash)
+        while '' in cut_hostname:
+            cut_hostname.remove('')
+        for possible_hostname in cut_hostname:
+            if possible_hostname.count(dot) >= 1:
+                hostname = possible_hostname
+                break
     else:
         pass
 
