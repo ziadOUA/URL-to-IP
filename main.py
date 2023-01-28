@@ -39,7 +39,7 @@ separator = '|'
 def url_to_ip():
     global valid
     global file_conversion_mode, url_conversion_mode
-    print(f'{Fore.BLACK + Back.WHITE} By ziadOUA {Fore.RESET + Back.RESET} {separator}')
+    print(f'{Fore.BLACK + Back.WHITE} By ziadOUA {Fore.BLACK + Back.RESET} {separator} {Fore.RESET}')
     conversion_mode_prompt()
     if file_conversion_mode:
         file_mode()
@@ -171,12 +171,12 @@ def hostname_conversion():
             print(hostname)
         else:
             print(old_hostname, arrow, hostname)
-        print(f'{arrow} {Fore.BLACK + Back.GREEN} {ip} {Fore.RESET + Back.RESET} {separator}')
+        print(f'{arrow} {Fore.BLACK + Back.GREEN} {ip} {Fore.BLACK + Back.RESET} {separator} {Fore.RESET}')
         ip_list.append(ip)
     except OSError:
         new_line()
         print(hostname)
-        print(f'{arrow} {Fore.BLACK + Back.RED} Not Valid {Fore.RESET + Back.RESET} {separator}')
+        print(f'{arrow} {Fore.BLACK + Back.RED} Not Valid {Fore.BLACK + Back.RESET} {separator} {Fore.RESET}')
 
 
 def new_line():
