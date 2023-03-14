@@ -1,5 +1,5 @@
 # URL to IP
-<img src="https://pictshare.net/j4qqjc.png" margin-bottom="20px"/>
+<img src="https://i.postimg.cc/c1m9gKPF/URLTOOLS.png" margin-bottom="20px"/>
 
 <p align="center">
   <img height="30px" src="https://ziadoua.github.io/m3-Markdown-Badges/badges/Python/python2.svg">
@@ -30,11 +30,14 @@ To clone the repository :
 
 <br>
 
-<p align="center">
-  <a href="https://github.com/ziadOUA">
-    <img align="center" height="75px" src="https://pictshare.net/4jwzdi.png">
-  </a>
+<p align="center">  
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="https://i.postimg.cc/KzPKjBNn/footer-Dark.png">
+    <source media="(prefers-color-scheme: light)" srcset="https://i.postimg.cc/C5wRq5P9/footer-Light.png">
+    <img alt="Footer" src="https://i.postimg.cc/KzPKjBNn/footer-Dark.png">
+  </picture>
 </p>
+
 <p align="center">
   <img src="https://ziadoua.github.io/m3-Markdown-Badges/badges/LicenceMIT/licencemit2.svg">
 </p>
